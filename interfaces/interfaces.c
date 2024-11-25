@@ -1,5 +1,5 @@
-#include "../utils/utils.h"
 #include "interfaces.h"
+#include "../utils/utils.h"
 
 #include "../source_sdk/debug_overlay/debug_overlay.h"
 #include "../source_sdk/engine_client/engine_client.h"
@@ -64,7 +64,7 @@ CreateInterfaceFn get_factory(const char *base_path, char *lib_name)
 void *get_interface(CreateInterfaceFn factory, const char *version)
 {
     void *interface = factory(version, NULL);
-    
+
     if (!interface)
     {
         log_msg("Failed to get %s interface\n", version);
@@ -72,7 +72,7 @@ void *get_interface(CreateInterfaceFn factory, const char *version)
     }
 
     log_msg("%s interface found at %p\n", version, interface);
-    
+
     return interface;
 }
 
@@ -117,7 +117,7 @@ bool init_interfaces()
      * CHLClient::HudProcessInput is just a call to g_pClientMode->ProcessInput. Globals are stored as effective addresses.
      * Effective addresses are 4 byte offsets, offset from the instruction pointer (address of next instruction).
      * Manually calculate the effective address of g_pClientMode and dereference it to get the interface.
-    */
+     */
     client_vtable = *(void ***)client_interface;
     void *hud_process_input_addr = client_vtable[10];
     __uint32_t client_mode_eaddr = *(__uint32_t *)((__uint64_t)(hud_process_input_addr) + 0x3);
@@ -129,7 +129,7 @@ bool init_interfaces()
     __uint32_t global_vars_eaddr = *(__uint32_t *)((__uint64_t)(hud_update) + 0x16);
     void *global_vars_next_instruction = (void *)((__uint64_t)(hud_update) + 0x1A);
     set_global_vars_ptr(*(void **)((__uint64_t)(global_vars_next_instruction) + global_vars_eaddr));
-    
+
     client_mode_vtable = *(void ***)client_mode_interface;
 
     return true;

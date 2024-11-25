@@ -38,7 +38,7 @@ struct vec3_t get_ent_origin(void *entity)
 {
     // x + 0x328, y + 0x332, z + 0x346
     return *(struct vec3_t *)((__uint64_t)(entity) + 0x328);
-}                                                           
+}
 
 struct vec3_t get_ent_eye_pos(void *entity)
 {
@@ -50,7 +50,7 @@ struct vec3_t get_ent_eye_pos(void *entity)
 
 struct vec3_t get_ent_angles(void *entity)
 {
-  return *(struct vec3_t *)((__uint64_t)(entity) + 0x334);
+    return *(struct vec3_t *)((__uint64_t)(entity) + 0x334);
 }
 
 struct vec3_t get_ent_velocity(void *entity)

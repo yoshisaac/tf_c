@@ -1,9 +1,9 @@
-#include "../../utils/utils.h"
 #include "engine_client.h"
-#include"../entity/entity.h"
+#include "../../utils/utils.h"
+#include "../entity/entity.h"
 
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 
 static void *interface = NULL;
 

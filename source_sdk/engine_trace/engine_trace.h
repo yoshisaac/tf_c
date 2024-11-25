@@ -5,10 +5,10 @@
 
 enum trace_type_t
 {
-	TRACE_EVERYTHING = 0,
-	TRACE_WORLD_ONLY,
-	TRACE_ENTITIES_ONLY,
-	TRACE_EVERYTHING_FILTER_PROPS,
+    TRACE_EVERYTHING = 0,
+    TRACE_WORLD_ONLY,
+    TRACE_ENTITIES_ONLY,
+    TRACE_EVERYTHING_FILTER_PROPS,
 };
 
 struct __attribute__((aligned(16))) vector_aligned
@@ -18,12 +18,12 @@ struct __attribute__((aligned(16))) vector_aligned
 
 struct ray_t
 {
-    struct vector_aligned start;	    // starting point, centered within the extents
-	struct vector_aligned delta;	    // direction + length of the ray
-	struct vector_aligned start_offset;	// Add this to m_Start to get the actual ray start
-	struct vector_aligned extents;	    // Describes an axis aligned box extruded along a ray
-	bool is_ray;	                    // are the extents zero?
-	bool is_swept;	                    // is delta != 0?
+    struct vector_aligned start;        // starting point, centered within the extents
+    struct vector_aligned delta;        // direction + length of the ray
+    struct vector_aligned start_offset; // Add this to m_Start to get the actual ray start
+    struct vector_aligned extents;      // Describes an axis aligned box extruded along a ray
+    bool is_ray;                        // are the extents zero?
+    bool is_swept;                      // is delta != 0?
 };
 
 struct trace_filter
@@ -74,5 +74,5 @@ bool should_hit_entity(struct trace_filter *interface, void *entity, int content
 enum trace_type_t get_type(struct trace_filter *interface);
 void init_trace_filter(struct trace_filter *filter, void *skip);
 
-void set_engine_trace_interface(void * engine_trace_interface);
+void set_engine_trace_interface(void *engine_trace_interface);
 void trace_ray(struct ray_t *ray, unsigned int f_mask, struct trace_filter *p_trace_filter, struct trace_t *p_trace);

@@ -1,9 +1,9 @@
-#include "../../utils/utils.h"
+#include "create_move.h"
 #include "../../source_sdk/engine_client/engine_client.h"
 #include "../../source_sdk/entity/entity.h"
 #include "../../source_sdk/user_cmd.h"
+#include "../../utils/utils.h"
 #include "../paint_traverse/paint_traverse.h"
-#include "create_move.h"
 
 #include <math.h>
 #include <stdbool.h>
@@ -32,13 +32,13 @@ __int64_t create_move_hook(void *this, float sample_time, struct user_cmd *user_
     }
 
     void *localplayer = get_localplayer();
-    
+
     if (!localplayer)
     {
         log_msg("localplayer is NULL\n");
         return rc;
     }
-    
+
     if (user_cmd->tick_count > 1)
     {
         clear_render_queue();
@@ -54,7 +54,8 @@ __int64_t create_move_hook(void *this, float sample_time, struct user_cmd *user_
     if (silent_aim)
     {
         return false;
-    } else
+    }
+    else
     {
         return rc;
     }

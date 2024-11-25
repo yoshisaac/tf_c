@@ -1,8 +1,8 @@
 #include "../../source_sdk/debug_overlay/debug_overlay.h"
-#include "../../source_sdk/entity/entity.h"
-#include "../../source_sdk/entity/weapon_entity.h"
 #include "../../source_sdk/engine_client/engine_client.h"
 #include "../../source_sdk/engine_trace/engine_trace.h"
+#include "../../source_sdk/entity/entity.h"
+#include "../../source_sdk/entity/weapon_entity.h"
 #include "../../source_sdk/entity_list/entity_list.h"
 #include "../../source_sdk/global_vars/global_vars.h"
 #include "../../source_sdk/math/vec3.h"
@@ -10,8 +10,8 @@
 #include "../../source_sdk/user_cmd.h"
 #include "../../utils/math/math_utils.h"
 #include "../../utils/utils.h"
-#include "../paint_traverse/paint_traverse.h"
 #include "../hooks.h"
+#include "../paint_traverse/paint_traverse.h"
 
 #include <math.h>
 #include <stdbool.h>
@@ -33,7 +33,7 @@ float get_rocket_predicted_time(void *entity, struct vec3_t ent_distance, int ro
         float b = (-1 * ent_velocity.z * gravity);
         float a = 0.25 * (gravity * gravity);
 
-        double poly[5] = { e, d, c, b, a };
+        double poly[5] = {e, d, c, b, a};
         double solutions[4];
         int num_sols = solve_real_poly(4, poly, solutions);
         double best_solution = __DBL_MAX__;
@@ -50,10 +50,9 @@ float get_rocket_predicted_time(void *entity, struct vec3_t ent_distance, int ro
     else
     {
         int a = (rocket_speed_per_second * rocket_speed_per_second) - (ent_velocity.x * ent_velocity.x) - (ent_velocity.y * ent_velocity.y) - (ent_velocity.z * ent_velocity.z);
-        int b = -2 * ( (ent_distance.x * ent_velocity.x) + (ent_distance.y * ent_velocity.y) + (ent_distance.z * ent_velocity.z) );
-        int c = -1 * ( (ent_distance.x * ent_distance.x) + (ent_distance.y * ent_distance.y) + (ent_distance.z * ent_distance.z) );
+        int b = -2 * ((ent_distance.x * ent_velocity.x) + (ent_distance.y * ent_velocity.y) + (ent_distance.z * ent_velocity.z));
+        int c = -1 * ((ent_distance.x * ent_distance.x) + (ent_distance.y * ent_distance.y) + (ent_distance.z * ent_distance.z));
         return positive_quadratic_root((float)a, (float)b, (float)c);
-
     }
 }
 
@@ -96,13 +95,13 @@ struct vec3_t get_view_angle(struct vec3_t diff)
     // Common side between two right triangles
     float c = sqrt((diff.x * diff.x) + (diff.y * diff.y));
 
-    float pitch_angle = atan2(diff.z, c) * 180 / M_PI;        
+    float pitch_angle = atan2(diff.z, c) * 180 / M_PI;
     float yaw_angle = atan2(diff.y, diff.x) * 180 / M_PI;
 
     struct vec3_t view_angle = {
         .x = -pitch_angle,
         .y = yaw_angle,
-        .z = 0
+        .z = 0,
     };
 
     return view_angle;
@@ -127,7 +126,7 @@ void projectile_aimbot(void *localplayer, struct user_cmd *user_cmd, int weapon_
         {
             float curtime = get_global_vars_curtime();
             float time_diff = esp_predicted_time - curtime;
-            struct vec3_t color = time_diff > 0.0f ? (struct vec3_t) {75, 169, 200} : (struct vec3_t) {255, 75, 75};
+            struct vec3_t color = time_diff > 0.0f ? (struct vec3_t){75, 169, 200} : (struct vec3_t){255, 75, 75};
             float data = time_diff > 0.0f ? time_diff : 0.0f;
             add_to_render_queue(L"rocket", (int)projectile_predicted_screen.x, (int)projectile_predicted_screen.y, color, data);
             if (curtime > esp_predicted_time + projectile_esp_linger)
@@ -192,9 +191,9 @@ void projectile_aimbot(void *localplayer, struct user_cmd *user_cmd, int weapon_
 
         struct vec3_t target_view_angle = get_view_angle(ent_difference);
         struct vec3_t new_view_angle = get_view_angle(get_difference(rocket_predicted_pos, local_pos));
-        
+
         float ent_distance = get_distance(ent_pos, local_pos);
-        float fov_distance = sqrt(powf(sin((user_cmd->viewangles.x - target_view_angle.x) * (M_PI / 180) ) * ent_distance, 2.0) + powf(sin((user_cmd->viewangles.y - target_view_angle.y) * (M_PI / 180)) * ent_distance, 2.0));
+        float fov_distance = sqrt(powf(sin((user_cmd->viewangles.x - target_view_angle.x) * (M_PI / 180)) * ent_distance, 2.0) + powf(sin((user_cmd->viewangles.y - target_view_angle.y) * (M_PI / 180)) * ent_distance, 2.0));
 
         if (fov_distance < smallest_fov_angle)
         {
@@ -254,8 +253,8 @@ void hitscan_aimbot(void *localplayer, struct user_cmd *user_cmd)
         struct vec3_t new_view_angle = get_view_angle(ent_difference);
 
         float ent_distance = get_distance(ent_pos, local_pos);
-        float fov_distance = sqrt(powf(sin((user_cmd->viewangles.x - new_view_angle.x) * (M_PI / 180) ) * ent_distance, 2.0) + powf(sin((user_cmd->viewangles.y - new_view_angle.y) * (M_PI / 180)) * ent_distance, 2.0));
-	
+        float fov_distance = sqrt(powf(sin((user_cmd->viewangles.x - new_view_angle.x) * (M_PI / 180)) * ent_distance, 2.0) + powf(sin((user_cmd->viewangles.y - new_view_angle.y) * (M_PI / 180)) * ent_distance, 2.0));
+
         if (fov_distance < smallest_fov_angle)
         {
             target_ent = entity;
@@ -287,7 +286,7 @@ void aimbot(void *localplayer, struct user_cmd *user_cmd)
     int weapon_id = get_weapon_id(active_weapon);
     bool is_projectile_class = get_ent_class(localplayer) == TF_CLASS_SOLDIER;
     bool is_projectile_weapon = weapon_id == TF_WEAPON_ROCKETLAUNCHER || weapon_id == TF_WEAPON_ROCKETLAUNCHER_DIRECTHIT;
-    
+
     if (is_projectile_class && is_projectile_weapon)
     {
         projectile_aimbot(localplayer, user_cmd, weapon_id);

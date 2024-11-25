@@ -1,5 +1,5 @@
-#include "../../source_sdk/surface/surface.h"
 #include "../../source_sdk/math/vec3.h"
+#include "../../source_sdk/surface/surface.h"
 #include "paint_traverse.h"
 
 #include <pthread.h>
@@ -83,7 +83,8 @@ void draw_render_queue()
                 wchar_t data_str[64];
                 swprintf(data_str, 64, L"%ls: %.2f", render_queue[i].text, render_queue[i].data);
                 draw_print_text(data_str, wcslen(data_str));
-            } else
+            }
+            else
             {
                 draw_print_text(render_queue[i].text, wcslen(render_queue[i].text));
             }

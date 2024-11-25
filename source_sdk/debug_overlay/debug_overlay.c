@@ -15,6 +15,6 @@ int screen_position(struct vec3_t *point, struct vec3_t *screen)
     void **vtable = *(void ***)interface;
 
     int (*func)(void *, struct vec3_t *, struct vec3_t *) = vtable[9];
-    
+
     return func(interface, point, screen);
 }

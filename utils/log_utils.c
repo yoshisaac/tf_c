@@ -14,7 +14,7 @@ void log_msg(const char *format, ...)
 
     va_list args;
     va_start(args, format);
-    
+
     vfprintf(log_file, format, args);
     fflush(log_file);
 

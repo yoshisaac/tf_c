@@ -1,13 +1,13 @@
-#include "../../source_sdk/global_vars/global_vars.h"
-#include "../../source_sdk/surface/surface.h"
-#include "../../source_sdk/panel/panel.h"
 #include "paint_traverse.h"
+#include "../../source_sdk/global_vars/global_vars.h"
+#include "../../source_sdk/panel/panel.h"
+#include "../../source_sdk/surface/surface.h"
 
-#include <string.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 #include <wchar.h>
 
 // extern
@@ -16,7 +16,7 @@ __int64_t (*paint_traverse_original)(void *, void *, __int8_t, __int8_t) = NULL;
 void paint_traverse_hook(void *this, void *panel, __int8_t force_repaint, __int8_t allow_force)
 {
     paint_traverse_original(this, panel, force_repaint, allow_force);
-    
+
     static bool hooked = false;
     static unsigned long esp_font = 0;
 

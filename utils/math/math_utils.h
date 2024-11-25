@@ -5,7 +5,7 @@
  * https://github.com/yairchu/quartic
  */
 
-int solve_real_poly(int degree, const double* poly, double* results);
+int solve_real_poly(int degree, const double *poly, double *results);
 float positive_quadratic_root(float a, float b, float c);
 struct vec3_t get_difference(struct vec3_t pos1, struct vec3_t pos2);
 float get_distance(struct vec3_t pos1, struct vec3_t pos2);

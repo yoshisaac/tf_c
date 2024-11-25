@@ -1,8 +1,8 @@
+#include "hooks.h"
 #include "../interfaces/interfaces.h"
 #include "../utils/utils.h"
 #include "create_move/create_move.h"
 #include "paint_traverse/paint_traverse.h"
-#include "hooks.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -51,7 +51,7 @@ void restore_hooks()
         log_msg("VGuiPanel vtable not found, no restore necessary\n");
         return;
     }
-    
+
     if (!write_to_table(client_mode_vtable, create_move_index, create_move_original))
     {
         log_msg("Failed to restore CreateMove\n");

@@ -10,8 +10,8 @@
 #include "../hooks.h"
 #include <stdatomic.h>
 #include <stddef.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 void draw_2d_box(void *entity, int ent_index, bool draw_box, bool draw_health_bar, bool draw_name)
 {
@@ -26,14 +26,14 @@ void draw_2d_box(void *entity, int ent_index, bool draw_box, bool draw_health_ba
     }
 
     // Bounding box points
-    struct vec3_t frt = { ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_maxs->z };
-    struct vec3_t blb = { ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_mins->z };
-    struct vec3_t brt = { ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_maxs->z };
-    struct vec3_t flb = { ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_mins->z };
-    struct vec3_t brb = { ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_mins->z };
-    struct vec3_t flt = { ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_maxs->z };
-    struct vec3_t blt = { ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_maxs->z };
-    struct vec3_t frb = { ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_mins->z };
+    struct vec3_t frt = {ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_maxs->z};
+    struct vec3_t blb = {ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_mins->z};
+    struct vec3_t brt = {ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_maxs->z};
+    struct vec3_t flb = {ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_mins->z};
+    struct vec3_t brb = {ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_mins->z};
+    struct vec3_t flt = {ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_maxs->z};
+    struct vec3_t blt = {ent_origin_pos.x + ent_mins->x, ent_origin_pos.y + ent_mins->y, ent_origin_pos.z + ent_maxs->z};
+    struct vec3_t frb = {ent_origin_pos.x + ent_maxs->x, ent_origin_pos.y + ent_maxs->y, ent_origin_pos.z + ent_mins->z};
 
     struct vec3_t frt_2d, blb_2d, brt_2d, flb_2d, brb_2d, flt_2d, blt_2d, frb_2d;
     if (screen_position(&frt, &frt_2d) != 0 || screen_position(&blb, &blb_2d) != 0 || screen_position(&brt, &brt_2d) != 0 || screen_position(&flb, &flb_2d) != 0 || screen_position(&brb, &brb_2d) != 0 || screen_position(&flt, &flt_2d) != 0 || screen_position(&blt, &blt_2d) != 0 || screen_position(&frb, &frb_2d) != 0)
@@ -42,7 +42,7 @@ void draw_2d_box(void *entity, int ent_index, bool draw_box, bool draw_health_ba
     }
 
     // Get best 2d bounding box
-    struct vec3_t *points[] = { &frt_2d, &blb_2d, &brt_2d, &flb_2d, &brb_2d, &flt_2d, &blt_2d, &frb_2d };
+    struct vec3_t *points[] = {&frt_2d, &blb_2d, &brt_2d, &flb_2d, &brb_2d, &flt_2d, &blt_2d, &frb_2d};
     float left = points[0]->x;
     float bottom = points[0]->y;
     float right = points[0]->x;
@@ -74,10 +74,10 @@ void draw_2d_box(void *entity, int ent_index, bool draw_box, bool draw_health_ba
     // Tighten bounding box
     float height = bottom - top;
     left += height / 10;
-    top += height / 10; 
+    top += height / 10;
     right -= height / 10;
     height = bottom - top;
-    
+
     if (draw_box)
     {
         draw_set_color(255, 255, 255, 255);
@@ -90,7 +90,7 @@ void draw_2d_box(void *entity, int ent_index, bool draw_box, bool draw_health_ba
         int health = get_ent_health(entity) > max_health ? max_health : get_ent_health(entity);
         int over_heal = get_ent_health(entity) - max_health;
         float bar_height = (float)height * ((float)health / (float)max_health);
-        
+
         // Health bar + background
         draw_set_color(0, 0, 0, 255);
         draw_filled_rect(right + 1, bottom - bar_height, right + 4, bottom);
@@ -110,13 +110,14 @@ void draw_2d_box(void *entity, int ent_index, bool draw_box, bool draw_health_ba
 
     if (draw_name)
     {
-        //convert to wide char string
+        // convert to wide char string
         wchar_t name[32];
         size_t len = mbstowcs(name, ent_info.name, 32);
-        if (len != (size_t)-1) {
-        draw_set_text_color(255, 255, 255, 255);
-        draw_set_text_pos(left, top - 20);
-        draw_print_text(name, wcslen(name));
+        if (len != (size_t)-1)
+        {
+            draw_set_text_color(255, 255, 255, 255);
+            draw_set_text_pos(left, top - 20);
+            draw_print_text(name, wcslen(name));
         }
     }
 

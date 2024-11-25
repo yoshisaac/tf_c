@@ -19,7 +19,6 @@ struct global_vars
     int network_protocol;
 };
 
-
 // typedef struct {
 //     float realtime;
 //     int framecount;

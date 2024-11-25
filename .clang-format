@@ -1,0 +1,35 @@
+﻿---
+AlignAfterOpenBracket: DontAlign
+AllowAllConstructorInitializersOnNextLine: 'false'
+AllowShortBlocksOnASingleLine: 'false'
+AllowShortCaseLabelsOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: All
+AllowShortLoopsOnASingleLine: 'true'
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: 'No'
+BreakAfterJavaFieldAnnotations: 'false'
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Allman
+BreakBeforeTernaryOperators: 'false'
+ColumnLimit: '99999'
+ConstructorInitializerAllOnOneLineOrOnePerLine: 'false'
+Cpp11BracedListStyle: 'true'
+IndentCaseLabels: 'true'
+IndentWidth: '4'
+Language: Cpp
+PenaltyBreakAssignment: '999999'
+PenaltyBreakBeforeFirstCallParameter: '9999'
+PenaltyBreakComment: '9999'
+PenaltyBreakFirstLessLess: '9999'
+PenaltyBreakString: '9999'
+PenaltyBreakTemplateDeclaration: '9999'
+PenaltyExcessCharacter: '9999'
+PenaltyReturnTypeOnItsOwnLine: '9999'
+SpaceBeforeCpp11BracedList: 'false'
+SpaceBeforeCtorInitializerColon: 'false'
+TabWidth: '4'
+
+...
