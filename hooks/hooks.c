@@ -47,12 +47,14 @@ bool init_hooks()
     create_move_original = client_mode_vtable[create_move_index];
     log_msg("CreateMove found at %p\n", create_move_original);
 
+    /*
     if (!write_to_table(client_mode_vtable, create_move_index, create_move_hook))
     {
         log_msg("Failed to hook CreateMove\n");
         return false;
     }
-
+    */
+    
     paint_traverse_original = vgui_panel_vtable[paint_traverse_index];
     log_msg("PaintTraverse found at %p\n", paint_traverse_original);
 
